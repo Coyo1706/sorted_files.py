@@ -17,7 +17,7 @@ translation = {'а': 'a', 'б': 'b', 'в': 'v', 'г': 'g', 'д': 'd', 'е': 'e',
 
 punct_symbols = "!#$%&'\"()*+,№-/ :;<=>?@\][^`{|}~—"
 
-
+""" """
 def normalize(text):
     for c in punct_symbols:
         if c in text:
@@ -131,35 +131,17 @@ def file_sorter(root_direct):
                 arch_extens_files = file.split('.')[-1]
                 known_extens_list.append(arch_extens_files)
                 archive_list.append(normalize(file))
-                # old_file = os.path.join(path, file)
-                # new_file = os.path.join(path, normalize(file))
-                # os.rename(old_file, new_file)
-                # archive_dir = os.path.basename(new_file).split('.')[0]
-                # archive = os.path.basename(new_file)
-                # archive_path = os.path.join(f"{root_direct}", "archives", archive_dir)
-                # archive_path_file = os.path.join(f"{root_direct}", "archives", archive_dir, archive)
-                #
-                # try:
-                #     os.mkdir(archive_path)
-                # except FileExistsError:
-                #     pass
-                #
-                # filter_dir.append(archive_path)
-                # shutil.move(new_file, archive_path_file)
-                #
-                # try:
-                #     shutil.unpack_archive(archive_path_file, os.path.join(archive_path))
-                # except shutil.ReadError:
-                #     pass
 
             else:
-                extens_files = file.split('.')[-1]
-                unknown_extens_list.append(extens_files)
-                others_list.append(normalize(file))
+                if len(file.split('.')) != 1:
+                    extens_files = file.split('.')[-1]
+                    unknown_extens_list.append(extens_files)
+                    others_list.append(normalize(file))
                 try:
                     shutil.move(os.path.join(path, file), os.path.join(f"{root_direct}", "others"))
                 except shutil.Error:
                     pass
+
     for path, direct, files in os.walk(root_direct):
         for file in files:
 
