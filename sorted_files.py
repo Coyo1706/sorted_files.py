@@ -193,7 +193,7 @@ def file_sorter(root_direct):
 if __name__ == '__main__':
     try:
         file_sorter(argv[1])
-    except IndexError:
+    except FileNotFoundError:
         print(f"The path '{argv[1]}' does not exist, please make sure it is typed correctly.")
 
 
